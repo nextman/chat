@@ -1,7 +1,7 @@
 from channels.generic.websocket import WebsocketConsumer
 from asgiref.sync import async_to_sync
 from django.utils.html import escape
-
+from json import dumps
 
 class ChatConsumer(WebsocketConsumer):
     groups = ["public", ]
@@ -25,7 +25,7 @@ class ChatConsumer(WebsocketConsumer):
 
     def pack_message(self, text):
         return {"type": "send.message",
-                "text": escape(text)}
+                "text": dumps({"user": self.user.username, "text": escape(text)})}
 
     def send_message(self, event):
         self.send(text_data=event["text"])

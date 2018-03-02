@@ -20,8 +20,10 @@
         var webSocket = new WebSocket('ws://' + window.location.host + '/chat/');
 
         webSocket.onmessage = function (message) {
+            var data = JSON.parse(message.data);
             var messageHTML = document.createElement('p');
-            messageHTML.innerHTML = message.data;
+            var nowHHMM = new Date().toTimeString().substr(0, 5);
+            messageHTML.innerHTML = '<span>[' + nowHHMM + ']</span> <i>' + data.user + ' &gt;</i>  ' + data.text;
             messageArea.appendChild(messageHTML);
         }
 
