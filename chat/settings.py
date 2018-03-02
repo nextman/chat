@@ -135,3 +135,5 @@ CHANNEL_LAYERS = {
 }
 
 ASGI_APPLICATION = "chat.routing.application"
+
+LOGIN_REDIRECT_URL = '/'
