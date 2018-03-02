@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple Chat</title>
+</head>
+<body>
+
+<div id="chatRoom"></div>
+
+<form id="inputForm">
+    <input type="text" id="messageInput">
+</form>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        var messageArea = document.getElementById('chatRoom');
+        var messageInput = document.getElementById('messageInput');
+        var webSocket = new WebSocket('ws://' + window.location.host + '/chat/');
+
+        webSocket.onmessage = function (message) {
+            var messageHTML = document.createElement('p');
+            messageHTML.innerHTML = message.data;
+            messageArea.appendChild(messageHTML);
+        }
+
+        document.getElementById('inputForm').addEventListener("submit", function (e) {
+            e.preventDefault();
+            webSocket.send(messageInput.value);
+            messageInput.value = '';
+            messageInput.focus();
+        })
+        messageInput.focus();
+    });
+</script>
+</body>
+</html>
