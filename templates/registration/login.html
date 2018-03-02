@@ -3,12 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+    <style>
+        html {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+
+        form {
+            margin: auto;
+            width: 40em;
+            text-align: center;
+        }
+
+        button {
+            padding: .5em;
+        }
+
+    </style>
 </head>
 <body>
-  <form method="post">
+<form method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Login</button>
-  </form>
+</form>
 </body>
 </html>
